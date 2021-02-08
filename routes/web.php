@@ -19,13 +19,24 @@ Route::get('/', function () {
 });
 
 Route::group([
+    'prefix' => 'cart',
+    'as' => 'cart.',
+    'middleware' => 'auth',
+], function () {
+    Route::get('/', 'CartController@index')->name('index');
+    Route::get('add/{id}', 'CartController@add')->name('add');
+    Route::get('remove/{id}', 'CartController@remove')->name('remove');
+    Route::get('clear', 'CartController@clear')->name('clear');
+});
+
+Route::group([
     'prefix' => 'admin/item',
     'namespace' => 'Admin',
     'as' => 'admin.item.',
-], function(){
+], function () {
     Route::get('/', 'ItemController@index')->name('index');
     Route::get('create/', 'ItemController@create')->name('create');
-    Route::post('add/','ItemController@add')->name('add');
+    Route::post('add/', 'ItemController@add')->name('add');
     Route::get('edit/{id}', 'ItemController@edit')->name('edit');
     Route::post('update/{id}', 'ItemController@update')->name('update');
     Route::post('delete/{id}', 'ItemController@delete')->name('delete');
