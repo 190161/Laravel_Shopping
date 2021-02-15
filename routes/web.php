@@ -24,9 +24,12 @@ Route::group([
     'middleware' => 'auth',
 ], function () {
     Route::get('/', 'CartController@index')->name('index');
-    Route::get('add/{id}', 'CartController@add')->name('add');
-    Route::get('remove/{id}', 'CartController@remove')->name('remove');
-    Route::get('clear', 'CartController@clear')->name('clear');
+    Route::get('/add/{id}', 'CartController@add')->name('add');
+    Route::get('/remove/{id}', 'CartController@remove')->name('remove');
+    Route::get('/clear', 'CartController@clear')->name('clear');
+    Route::get('/confirm', 'CartController@confirm')->name('confirm');
+    Route::post('/updates', 'CartController@updates')->name('updates');
+    Route::post('/order', 'CartController@order')->name('order');
 });
 
 Route::group([
